@@ -1,0 +1,19 @@
+services:
+  greeting-service:
+  image: ghcr.io/<your-username>/greeting-service/app:latest
+  env_file: ./.env
+  ports:
+    - "8081:8081"
+  networks:
+    - labnet
+  proxy-service:
+  image: ghcr.io/<your-username>/proxy-service/app:latest
+  env_file: ./.env
+  depends_on:
+    - greeting-service
+  ports:
+    - "8080:8080"
+  networks:
+    - labnet
+networks:
+  labnet:
